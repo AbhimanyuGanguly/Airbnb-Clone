@@ -1,0 +1,161 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222222 !important;
+}
+.f-info-links a{
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+.f-info-links,.f-info-socials, .f-info-brand{
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.f-info-socials i{
+    font-size: 1.3rem;
+    margin-right: 1rem;
+}
+.f-info{
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+.privacy{
+    margin-right: 2px;
+}
+.listing-card{
+    border: none !important;;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+.card-text p {
+    font-weight: 400 !important;
+}
+.listing-link{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: .2;
+    background-color: white;
+}
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+.edit-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+.show-img{
+    height: 48vh;
+}
+.btns{
+    display: flex;
+}
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+#map{
+    height: 400px;
+    width: 90vh;
+}
+.marker {
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#filters{
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+}
+.filter{
+text-align: center;
+margin-right: 2rem;
+margin-top: 2rem;
+opacity: 0.7;
+text-decoration: none;
+color:inherit;
+}
+.filter a{
+    color: inherit;
+}
+.filter:hover{
+opacity: 1;
+cursor: pointer;
+}
+.filter p{
+font-size: 0.8rem;
+}
+.tax-info{
+display: none;
+}
+.tax-toggle{
+border: 1px solid black;
+border-radius: 1rem;
+height: 3.25rem;
+padding: 1rem;
+margin-left: 2rem;
+display: flex;
+align-items: center;
+}
+.search-btn{
+    background-color: #fe424d !important;
+    color: #fff !important;
+    border-radius: 25px !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+.search-btn:hover{
+    background-color: #fe424d !important;
+    color: #fff !important;
+}
+.search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+}
+.search-input{
+    border-radius: 25px !important;
+    padding-top: 0.5rem !important;
+    padding-right: 3rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 3rem !important;
+}   
