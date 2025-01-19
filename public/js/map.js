@@ -1,4 +1,5 @@
 mapboxgl.accessToken = mapToken;
+const coordinates = [-74.0060, 40.7128];
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     center: coordinates, // starting position [lng, lat]. Note that lat must be set between -90 and 90
