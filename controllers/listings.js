@@ -45,18 +45,26 @@ module.exports.showListing = async (req, res) => {
     res.render("listings/show.ejs", { listing ,averageRating, reviewCount});
 };
 
-module.exports.createListing = async (req, res,next) => {
-  let response  = await geocodingClient.forwardGeocode({
+module.exports.createListing = async (req, res, next) => {
+  let response = await geocodingClient.forwardGeocode({
     query: req.body.listing.location,
     limit: 1,
-  })
-    .send();
+  }).send();
+
+  // Ensure response body has valid geometry
+  const coordinates = response.body.features[0]?.geometry?.coordinates;
+  if (!coordinates) {
+    req.flash("error", "Could not retrieve valid coordinates.");
+    return res.redirect("/listings/new");
+  }
+
   let url = req.file.path;
   let filename = req.file.filename;
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
-  newListing.image = {url,filename};
-  newListing.geometry = response.body.features[0].geometry;
+  newListing.image = { url, filename };
+  newListing.geometry = response.body.features[0].geometry; // Ensure geometry is valid
+
   await newListing.save();
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
