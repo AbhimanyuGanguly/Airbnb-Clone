@@ -19,14 +19,32 @@
       ></textarea>
       <div class="invalid-feedback">Enter a valid Description</div>
       </div>
-      <div class="mb-3">
-        <label for="image" class="form-label">Upload Image</label>
-        <input
-        name="listing[image]"
-        type="file"
-        class="form-control"
-        required
-      />
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="image" class="form-label">Upload Image</label>
+          <input
+          name="listing[image]"
+          type="file"
+          class="form-control"
+          required
+        />
+        <div class="mb-3 col-md-8">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select form-control" name="listing[category]" required>
+            <option selected>Category</option>
+            <option value="mountains">Mountain</option>
+            <option value="mountains">Trendy</option>
+            <option value="iconic_cities">Iconic City</option>
+            <option value="castles">Castle</option>
+            <option value="amazing_pools">Amazing Pool</option>
+            <option value="camping">Camping</option>
+            <option value="arctic">Arctic</option>
+            <option value="farm">Farm</option>
+            <option value="boats">Boat</option>
+            <option value="domes">Dome</option>
+          </select>
+        </div>
+        </div>
       </div>
       <div class="row">
         <div class="mb-3 col-md-4">
