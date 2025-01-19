@@ -1,4 +1,7 @@
 {
+  "resolutions": {
+      "cloudinary": "^1.21.0"
+    },
   "engines": {
     "node": "22.12.0"
   },
