@@ -1,4 +1,4 @@
-const coordinates = listing.geometry.coordinates;
+const coordinates = listing.geometry.coordinates; // Ensure geometry exists
 if (coordinates && coordinates.length === 2) {
   mapboxgl.accessToken = mapToken;
   const map = new mapboxgl.Map({
@@ -15,5 +15,6 @@ if (coordinates && coordinates.length === 2) {
     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<p>Exact location provided after booking.</p>"))
     .addTo(map);
 } else {
-  console.error('Invalid coordinates:', coordinates);
+  console.error("Invalid or missing coordinates:", coordinates);
+  alert("Map could not be loaded. Location data is missing.");
 }

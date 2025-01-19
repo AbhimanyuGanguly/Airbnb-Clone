@@ -34,16 +34,23 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.showListing = async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id).populate({path:"reviews",populate: { path: "author"}}).populate("owner");
-    if(!listing){
-      req.flash("error", "Listing you requested for, does not exist!");
-      res.redirect("/listings");
-    } 
-    const averageRating = calculateAverageRating(listing.reviews);
-    const reviewCount = listing.reviews.length;
-    res.render("listings/show.ejs", { listing ,averageRating, reviewCount});
+  const { id } = req.params;
+  const listing = await Listing.findById(id).populate({
+    path: "reviews",
+    populate: { path: "author" },
+  }).populate("owner");
+
+  if (!listing || !listing.geometry || !listing.geometry.coordinates) {
+    req.flash("error", "Listing or location data is missing.");
+    return res.redirect("/listings");
+  }
+
+  const averageRating = calculateAverageRating(listing.reviews);
+  const reviewCount = listing.reviews.length;
+
+  res.render("listings/show", { listing, averageRating, reviewCount });
 };
+
 
 module.exports.createListing = async (req, res, next) => {
   let response = await geocodingClient.forwardGeocode({
@@ -51,24 +58,26 @@ module.exports.createListing = async (req, res, next) => {
     limit: 1,
   }).send();
 
-  // Ensure response body has valid geometry
-  const coordinates = response.body.features[0]?.geometry?.coordinates;
-  if (!coordinates) {
-    req.flash("error", "Could not retrieve valid coordinates.");
+  const features = response.body.features[0];
+  if (!features || !features.geometry) {
+    req.flash("error", "Unable to get location coordinates. Please try again.");
     return res.redirect("/listings/new");
   }
 
-  let url = req.file.path;
-  let filename = req.file.filename;
+  const geometry = features.geometry; // Ensure geometry is retrieved
+  const url = req.file.path;
+  const filename = req.file.filename;
+
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   newListing.image = { url, filename };
-  newListing.geometry = response.body.features[0].geometry; // Ensure geometry is valid
+  newListing.geometry = geometry; // Assign valid geometry here
 
   await newListing.save();
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
 };
+
 
 module.exports.renderEditForm = async (req, res) => {
     let { id } = req.params;
