@@ -21,7 +21,6 @@ module.exports.showSearch = async (req, res) => {
   if (search) {
     query.title = { $regex: search, $options: 'i' };  // Case-insensitive search
   }
-
   try {
     const allListings = await Listing.find(query);  // Filter listings based on search
     res.render('listings/index', { allListings, searchQuery: search });
@@ -58,6 +57,7 @@ module.exports.createListing = async (req, res,next) => {
   newListing.owner = req.user._id;
   newListing.image = {url,filename};
   newListing.geometry = response.body.features[0].geometry;
+  console.log(response.body.features[0].geometry);
   await newListing.save();
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
